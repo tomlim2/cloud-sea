@@ -11,10 +11,9 @@ import { finalMaterial } from './tsl/post.js';
 import { hour } from './tsl/sky.js';
 
 export const DAY = 150; // seconds for the sun to rise and set again
-export const LOWEST = -2; // the sun's height in degrees at the turn of the cycle: just set
+export const LOWEST = 1; // the sun's height in degrees at the start and end of the cycle: sunset
 export const HIGHEST = 16; // late afternoon at the top of the cycle: the gold stays
-// the cycle starts a little past its lowest point: the sun a degree up, as the reference has it
-export const SUNSET = (Math.acos(1 - (2 * (1 - LOWEST)) / (HIGHEST - LOWEST)) / (2 * Math.PI)) * DAY;
+export const DWELL = 2.2; // the curve's power: the sun lingers near the horizon and only touches the top
 
 async function makeRenderer(canvas, forceWebGL) {
   const make = (gl) => new THREE.WebGPURenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance', forceWebGL: gl });
@@ -139,8 +138,8 @@ export async function createScene(host, hooks = {}) {
     pointer.sy += (pointer.y - pointer.sy) * (1 - Math.exp(-2.5 * dt));
     aim();
     u.cam.value.set(t * 0.8, 6.0, 0.0);
-    // the hour: the sun climbs from just below the horizon and sets again over one cycle
-    const deg = LOWEST + (HIGHEST - LOWEST) * (0.5 - 0.5 * Math.cos((2 * Math.PI * (t + SUNSET)) / DAY));
+    // the hour: the sun climbs from the horizon and sets again over one cycle, most of it spent low
+    const deg = LOWEST + (HIGHEST - LOWEST) * Math.pow(0.5 - 0.5 * Math.cos((2 * Math.PI * t) / DAY), DWELL);
     const h = hour(deg);
     u.sun.value.fromArray(h.dir);
     u.sunCol.value.fromArray(h.sun);
