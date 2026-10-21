@@ -3,7 +3,9 @@
 구름바다 — 노을 속 뭉게구름 밭 위를 날아가는 실시간 볼륨 레이마치. 해가 뜨고 지는 동안 빛이 바뀐다.
 three.js TSL 로 써서 WebGPU 와 WebGL 2 양쪽에서 같은 코드로 돈다. 에셋 없음.
 
+- 사이트: https://tomlim2.github.io/cloud-sea/
 - 저장소: https://github.com/tomlim2/cloud-sea
+- 허브: [LLM Works](https://tomlim2.github.io/llm-playground/) 에 등록 (허브 `projects.json` 첫 번째)
 - 참고: fragcoord.xyz 의 셰이더 한 편 (https://fragcoord.xyz/s/cpwi3i3h, freeborn). 구름을 만들고 비추는 방법은 그대로, 나머지는 새로
 
 ## 장면 (쉬운 설명)
@@ -67,7 +69,19 @@ npm run dev     # www/.claude/launch.json 의 "cloud-sea" 는 5189
 
 ## 배포
 
-`.github/workflows/deploy.yml` 이 `v*` 태그에서 Pages 로 올린다 (`npm version patch` → 태그 push). 아직 태그를 올리지 않았다. 처음 공개할 때는 Pages 소스 = Actions, `github-pages` 환경에 `v*` 허용이 필요하다.
+```bash
+npm version patch   # minor / major 도 됨
+```
+
+버전을 올리면 `v*` 태그가 push 되고, 태그가 `.github/workflows/deploy.yml` 을 돌려 `npm ci` → `npm run build` → Pages 에 올린다.
+커밋하지 않은 변경이 있으면 `npm version` 이 멈추니 먼저 커밋. GitHub 설정(Pages 소스 = Actions, `github-pages` 환경에 `main`·`v*` 허용)은 해 둠.
+허브는 새 배포를 알아서 찾아 썸네일을 다시 찍는다.
+
+### 버전 기록
+
+| 버전 | 날짜 | 내용 |
+|---|---|---|
+| v0.1.0 | 2026-10-21 | 첫 공개 |
 
 ## 알려진 한계
 

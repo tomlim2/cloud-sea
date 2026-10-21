@@ -3,6 +3,8 @@
 노을 속 뭉게구름 밭 위를 천천히 날아간다. 해가 지평선에서 떠올라 오후 높이까지 갔다가 다시 내려오는 동안 구름의 빛이 붉은 노을에서 금빛 오후로, 다시 노을로 바뀐다.
 three.js의 TSL(Three.js Shading Language)로 쓴 실시간 볼륨 레이마치. WebGPU가 있는 브라우저에서는 WebGPU로, 없으면 WebGL 2로 그린다 (셰이더 한 벌로). 에셋 없음.
 
+https://tomlim2.github.io/cloud-sea/
+
 ```bash
 npm install
 npm run dev
