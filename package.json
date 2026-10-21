@@ -1,7 +1,7 @@
 {
   "name": "cloud-sea",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "구름바다: 노을 속 뭉게구름 밭을 날아가는 실시간 볼륨 레이마치. three.js TSL (WebGPU, WebGL 2 fallback).",
   "scripts": {
